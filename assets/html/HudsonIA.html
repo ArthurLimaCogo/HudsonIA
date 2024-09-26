@@ -1,0 +1,152 @@
+<script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+</script>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <script type="module" src="/assets/js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de PowerPoint</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Backdrop -->
+    <div class="backdrop" id="backdrop"></div>
+
+    <img src="/fotos/magnus.png" alt="Logo MAGNUS" class="mini-logo">
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <img src="/fotos/magnus.png" alt="Logo MAGNUS" class="mini-logo">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              </a>
+              <div class="dropdown-menu" aria-labelledby="helpDropdown">
+                <a class="dropdown-item" href="#" id="help-link">Ajuda</a>
+                <a class="dropdown-item" href="/assets/html/suporte.html">Suporte</a>
+                <a class="dropdown-item" href="/assets/html/sobre.html">Sobre</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    
+      <!-- Seção de perguntas frequentes -->
+      <div class="container content-section" id="faq-section" style="display: none;">
+        <h3>Perguntas Frequentes</h3>
+        <div class="accordion" id="faqAccordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Como adicionar vídeos?
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+              <div class="card-body">
+                Na página de edição do slide, existe um clip, neste clip, você consegue adicionar fotos e vídeos.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Como alterar o título de um slide?
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+              <div class="card-body">
+                No editor de slides, clique no título e faça a edição diretamente na caixa de texto.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Como salvar as alterações?
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+              <div class="card-body">
+                Após realizar as edições, clique no botão "Salvar" no canto superior direito.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="container conteiner-principal d-flex flex-column justify-content-center align-items-center">
+
+        <div class="cabecalho">
+            <h1 class="titulo text-center mb-5 fs-1 ">HUDSON <br> STORYTELLING</h1>
+        </div>
+
+        <div class="text-center mt-5 pesquisa">
+            <section>
+                <h2 class="mb-3 title">Gerador de Apresentação</h2>
+            </section>
+            <textarea id="search" class="form-control campo-detalhamento text-center mx-auto"
+                placeholder="Detalhe sua apresentação"></textarea>
+        </div>
+
+        <!-- Input para upload de imagem escondido -->
+        <input type="file" id="imageUpload" class="form-control d-none" accept="image/*">
+        <!-- Input para upload de documentos escondido -->
+        <input type="file" id="docUpload" class="form-control d-none" accept=".csv,.pdf,.doc,.docx,.txt,">
+
+        <!-- Adiciona uma área para exibir o nome do arquivo ou a pré-visualização da imagem -->
+        <div id="filePreview" class="mt-3"></div>
+
+        <div class="d-flex justify-content-center mb-5 mt-4">
+            <div class="botao-selecao mx-2" id="docButton">
+                <img src="/fotos/doc.png" alt="Ícone de um arquivo" class="img-fluid icon">
+                <p class="text-center mt-2">Documento</p>
+            </div>
+            <!-- Botão de seleção de imagem agora também abre o explorador de arquivos -->
+            <div class="botao-selecao mx-2" id="imageButton">
+                <img src="/fotos/foto.png" alt="Ícone de uma imagem" class="img-fluid icon">
+                <p class="text-center mt-2">Imagem</p>
+            </div>
+            <div class="botao-selecao mx-2">
+                <img src="/fotos/video.png" alt="Ícone de um vídeo" class="img-fluid icon">
+                <p class="text-center mt-2">Vídeo</p>
+            </div>
+        </div>
+
+        <button class="btn botao-gerar" id="generateButton">GERAR</button>
+        <div id="output" class="output-area"></div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>
