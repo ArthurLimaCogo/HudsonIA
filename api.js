@@ -1,11 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Acessar sua chave de API
-const API_KEY = "AIzaSyAZ05DFP2IQe4WOHhKuiIedGCfRK88FrWw"; // Substitua por sua chave API
+const API_KEY = "AIzaSyA8TYC4fXkP6YnlHTVCUxxdqq8P9vSe9Sk"; // Substitua por sua chave API
 
 // Inicializa a API
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Função para ler a imagem como Base64
 function readFileAsBase64(file) {
