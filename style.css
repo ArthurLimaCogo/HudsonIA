@@ -26,6 +26,18 @@ section .title::before {
     transform: translateX(-50%);
 }
 
+/* Remove a barra azul ou sublinhado dos links */
+a {
+    text-decoration: none;
+    color: inherit; /* Preserva a cor de texto definida no contêiner pai */
+}
+
+/* Estilo para links ao passar o mouse */
+a:hover {
+    color: #555; /* Define a cor ao passar o mouse */
+}
+
+
 /* Estilo e posição do logo */
 .mini-logo {
     position: absolute;
@@ -37,27 +49,49 @@ section .title::before {
 
 /* Tornar o navbar transparente */
 .custom-navbar {
-    background-color: transparent; /* Remove o fundo */
-    border: none; /* Remove qualquer borda */
-    z-index: 1000; /* Certifique-se de que o navbar fique acima do conteúdo */
-    position: absolute; /* Deixa o navbar sobreposto ao conteúdo */
-    width: 100%; /* Ocupa toda a largura */
+    background-color: transparent; /* Fundo levemente transparente */
+    border: none;
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
 }
 
 .custom-navbar .nav-link {
-    color: white; /* Cor dos links no navbar para garantir visibilidade */
+    color: white;
     font-size: 1.1em;
     font-weight: bold;
 }
 
 .custom-navbar .nav-link:hover {
-    color: #ccc; /* Cor dos links ao passar o mouse */
+    color: #ccc;
 }
 
+/* Ícone do botão de colapso do navbar no mobile */
 .custom-navbar .navbar-toggler {
-    border-color: white; /* Cor do ícone de menu no modo mobile */
+    border: none;
+    color: white;
 }
 
+.custom-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.5 12.5a.5.5 0 0 1 0-1h13a.5.5 0 0 1 0 1h-13zm0-4a.5.5 0 0 1 0-1h13a.5.5 0 0 1 0 1h-13zm0-4a.5.5 0 0 1 0-1h13a.5.5 0 0 1 0 1h-13z'/%3E%3C/svg%3E"); /* Ícone branco */
+}
+
+/* Ajustes no dropdown para melhor visibilidade */
+.custom-navbar .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro */
+    border: none;
+}
+
+.custom-navbar .dropdown-item {
+    color: white;
+}
+
+.custom-navbar .dropdown-item:hover {
+    background-color: #555;
+    color: white;
+}
+
+/* Backdrop */
 .backdrop {
     position: fixed;
     top: 0;
@@ -65,22 +99,39 @@ section .title::before {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 999; 
+    z-index: 999;
     display: none; 
 }
+
 
 .content-section {
     padding: 20px;
     background-color: white;
-    position: fixed; /* Fixa a seção na tela */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Ocupe a altura total */
-    z-index: 1000; /* Certifique-se de que ela fique acima do conteúdo */
-    overflow-y: auto; /* Habilita rolagem se o conteúdo for maior que a tela */
-    display: none; /* Começa escondida */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px; /* Limite de largura em telas maiores */
+    max-height: 80vh;
+    z-index: 1000;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    text-decoration: none;
 }
+
+/* Responsivo para telas pequenas */
+@media (max-width: 768px) {
+    .content-section {
+        width: 90%; /* Largura maior em dispositivos móveis */
+        max-width: 90%; /* Remove limite de largura para telas pequenas */
+        max-height: 70vh; /* Reduz a altura máxima */
+        padding: 15px; /* Menor espaçamento interno */
+    }
+}
+
 
 .cabecalho {
     width: 100%;
